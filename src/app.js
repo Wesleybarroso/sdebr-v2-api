@@ -7,6 +7,7 @@ import { initDB } from './database/db.js';
 import { globalLimiter } from './middleware/rateLimit.js';
 import { ipBlocker } from './middleware/ipBlocker.js';
 import { limparDadosExpirados } from './utils/cleanup.js';
+import { seedAdmin } from './utils/seedAdmin.js'; 
 import { corsConfig } from './config/cors.js';
 import { logger } from './config/logger.js';
 
@@ -104,12 +105,15 @@ app.use((err, req, res, next) => {
 });
 
 // ======================
-// 🗄️ BANCO + LIMPEZA AGENDADA
+// 🗄️ BANCO + LIMPEZA AGENDADA + ADMIN SEED
 // ======================
 async function start() {
   try {
     await initDB();
     logger.info('Banco de dados inicializado com sucesso');
+    
+     // 🔐 CRIA ADMIN AUTOMATICAMENTE SE NÃO EXISTIR
+    await seedAdmin();  // ← ADICIONE ESTA LINHA
 
     // limpeza imediata + agendada a cada hora
     await limparDadosExpirados();

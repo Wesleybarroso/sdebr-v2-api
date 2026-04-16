@@ -12,6 +12,7 @@
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Configuração](#configuração)
+- [Primeiro Acesso (Administrador)](#primeiro-acesso-administrador)  
 - [Executando a API](#executando-a-api)
 - [Estrutura do Projeto](#estrutura-do-projeto)
 - [Endpoints](#endpoints)
@@ -155,6 +156,36 @@ Copie o resultado para JWT_SECRET e JWT_REFRESH_SECRET no .env.
 Configurar CORS para produção
 # Múltiplos domínios (separados por vírgula)
 CORS_ORIGIN=https://meusite.com.br,https://admin.meusite.com.br
+
+
+
+
+## 👑 Primeiro Acesso (Administrador)
+
+O sistema **cria automaticamente** um administrador na primeira execução, garantindo que você tenha acesso imediato ao painel administrativo.
+
+### 🔐 Credenciais Padrão
+
+| Campo | Valor |
+|-------|-------|
+| **Email** | `admin@sdebr.com` |
+| **Senha** | `Admin123` |
+
+### ⚠️ Importante
+
+- ✅ O admin **só é criado** se não existir nenhum administrador no sistema
+- ✅ As credenciais aparecem nos **logs** na primeira execução
+- 🔐 **Altere a senha imediatamente** após o primeiro login
+- 🚫 Remova as variáveis `ADMIN_*` do `.env` em produção após criar o admin
+
+### 🛠️ Personalizar Credenciais
+
+Para criar um admin com dados personalizados, adicione no `.env`:
+
+```env
+ADMIN_EMAIL=seu-email@dominio.com
+ADMIN_SENHA=SuaSenhaForte2026!
+ADMIN_NOME=Seu Nome
 
 🚀 Executando a API
 DESENVOLVIMENTO
@@ -319,6 +350,8 @@ PRAGMA journal_mode = WAL      -- Melhor performance
 PRAGMA synchronous = NORMAL    -- Segurança + velocidade
 PRAGMA cache_size = -20000     -- 20MB de cache
 PRAGMA foreign_keys = ON       -- Integridade referencial
+-------------------------------------------------------------------------
+
 🔐 Variáveis de Ambiente
 env
 # ======================
@@ -375,6 +408,8 @@ BCRYPT_SALT_ROUNDS=12
 # 📍 LIMITES DE NEGÓCIO
 # ======================
 MAX_PONTOS_POR_USUARIO=2      # Máximo de pontos por usuário
+
+--------------------------------------------------------------------------
 📜 Scripts Disponíveis
 json
 {
@@ -530,7 +565,10 @@ json
 {
   "error": "Erro interno do servidor"
 }
+
+----------------------------------------------------------------------------
 🧹 Limpeza Automática
+
 Tarefa	Frequência	Descrição
 Limpar IPs expirados	A cada hora	Remove IPs com expires_at vencido
 Limpar auditoria antiga	A cada hora	Remove logs com mais de 90 dias
@@ -550,7 +588,7 @@ Abra um Pull Request
 ISC
 
 👨‍💻 Autor
-SDEBR - Sistema de Doações Especializado Brasileiro
+WESLEY BARROSO 
 
 🆘 Suporte
 Em caso de problemas:
@@ -573,16 +611,17 @@ bash
 curl http://localhost:3000/
 📌 Status do Projeto
 ✅ API 100% completa e pronta para produção!
-Módulo	Status	Testes
-Autenticação	✅ Completo	✅
-Pontos de Coleta	✅ Completo	✅
-Necessidades	✅ Completo	✅
-Doações	✅ Completo	✅
-Administração	✅ Completo	✅
-Segurança	✅ Completo	✅
-Logs	✅ Completo	✅
-Auditoria	✅ Completo	✅
-Documentação	✅ Completa	✅
+Módulo	        Status	        Testes
+Autenticação	    ✅      Completo	✅
+Pontos de Coleta	✅      Completo	✅
+Necessidades	    ✅      Completo	✅
+Doações	          ✅      Completo	✅
+Administração	    ✅      Completo	✅
+Segurança	        ✅      Completo	✅
+Logs	            ✅      Completo	✅
+Auditoria	        ✅      Completo	✅
+Documentação	    ✅      Completa	✅
+
 🎯 Roadmap (Futuro)
 Implementar refresh token
 
