@@ -6,6 +6,7 @@ import { Router } from 'express';
 import {
   criarPonto,
   listarPontos,
+  buscarPonto,
   atualizarPonto,
   deletarPonto
 } from '../controllers/pontosController.js';
@@ -72,6 +73,7 @@ router.put('/alterar-senha', authMiddleware, alterarSenha);
 // 📍 PONTOS
 // ======================
 router.get('/pontos', listarPontos);
+router.get('/pontos/:id', buscarPonto);
 router.post('/pontos', authMiddleware, permit('admin'), criarPonto);
 router.put('/pontos/:id', authMiddleware, permit('admin'), atualizarPonto);
 router.delete('/pontos/:id', authMiddleware, permit('admin'), deletarPonto);
